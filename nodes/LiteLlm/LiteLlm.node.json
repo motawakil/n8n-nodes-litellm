@@ -1,0 +1,21 @@
+{
+	"node": "@motaouakel/n8n-nodes-litellm.liteLlm",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": [
+		"Development",
+		"Developer Tools"
+	],
+	"resources": {
+		"credentialDocumentation": [
+			{
+				"url": "https://www.npmjs.com/package/@motaouakel/n8n-nodes-litellm#credentials"
+			}
+		],
+		"primaryDocumentation": [
+			{
+				"url": "https://www.npmjs.com/package/@motaouakel/n8n-nodes-litellm"
+			}
+		]
+	}
+}
