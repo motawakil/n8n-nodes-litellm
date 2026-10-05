@@ -95,7 +95,12 @@ jobs:
         # Option B (token): set NPM_TOKEN in repo secrets — it is written to
         #   .npmrc here before publishing.
         run: |
-          [ -n "$NPM_TOKEN" ] && npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          # An `if` is required rather than `[ ... ] && ...`: with OIDC trusted
+          # publishing NPM_TOKEN is unset, the test returns 1, and GitHub's
+          # `bash -e` would abort the step before npm run release.
+          if [ -n "$NPM_TOKEN" ]; then
+            npm config set //registry.npmjs.org/:_authToken "$NPM_TOKEN"
+          fi
           npm run release
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
