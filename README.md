@@ -8,19 +8,14 @@ Chat Model sub-node already accept a custom base URL, so they talk to a LiteLLM 
 this package fills is everything around the inference call: who gets a key, what it may spend, and
 what it actually spent.
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/motawakil/n8n-nodes-litellm/main/docs/images/node-panel.png"
-       alt="The LiteLLM node on an n8n canvas with its action list open" width="900">
-</p>
-
 All 25 operations appear in the node's action list, grouped by resource:
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/motawakil/n8n-nodes-litellm/main/docs/images/actions-key-model.png"
-       alt="Key and Model actions" width="330">
+       alt="Key and Model actions in the n8n node panel" width="340">
   &nbsp;&nbsp;
   <img src="https://raw.githubusercontent.com/motawakil/n8n-nodes-litellm/main/docs/images/actions-spend-team-user.png"
-       alt="Spend, Team and User actions" width="330">
+       alt="Spend, Team and User actions in the n8n node panel" width="340">
 </p>
 
 ## Resources and operations
