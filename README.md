@@ -8,16 +8,6 @@ Chat Model sub-node already accept a custom base URL, so they talk to a LiteLLM 
 this package fills is everything around the inference call: who gets a key, what it may spend, and
 what it actually spent.
 
-All 25 operations appear in the node's action list, grouped by resource:
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/motawakil/n8n-nodes-litellm/main/docs/images/actions-key-model.png"
-       alt="Key and Model actions in the n8n node panel" width="340">
-  &nbsp;&nbsp;
-  <img src="https://raw.githubusercontent.com/motawakil/n8n-nodes-litellm/main/docs/images/actions-spend-team-user.png"
-       alt="Spend, Team and User actions in the n8n node panel" width="340">
-</p>
-
 ## Resources and operations
 
 | Resource | Operations | Endpoints |
@@ -33,6 +23,16 @@ the OSS build it returns 400 regardless of parameters. Every other operation wor
 
 Model and team pickers load their options live from the proxy, so a key's allowed models and a
 user's teams are chosen from a dropdown rather than typed.
+
+The same operations as they appear in the editor's action list:
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/motawakil/n8n-nodes-litellm/main/docs/images/actions-key-model.png"
+       alt="Key and Model actions in the n8n node panel" width="340">
+  &nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/motawakil/n8n-nodes-litellm/main/docs/images/actions-spend-team-user.png"
+       alt="Spend, Team and User actions in the n8n node panel" width="340">
+</p>
 
 ## Credentials
 
