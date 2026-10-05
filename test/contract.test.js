@@ -50,6 +50,19 @@ test('icons referenced by the node and credential exist', () => {
 	}
 });
 
+test('codex categories are all from n8n\'s allowed list', () => {
+	// n8n's verification scanner rejects anything outside this set; the local
+	// lint does not catch it.
+	const allowed = new Set([
+		'Data & Storage', 'Finance & Accounting', 'Marketing & Content', 'Productivity',
+		'Miscellaneous', 'Sales', 'Development', 'Analytics', 'Communication', 'Utility',
+	]);
+	const codex = require(path.join(root, 'dist/nodes/LiteLlm/LiteLlm.node.json'));
+	for (const c of codex.categories ?? []) {
+		assert.ok(allowed.has(c), `"${c}" is not an allowed community node category`);
+	}
+});
+
 test('codex does not tag the node as AI without an AI subcategory', () => {
 	// A node with the AI category but no subcategories.AI is filtered out of the
 	// regular node panel AND absent from the AI panel - invisible everywhere.
