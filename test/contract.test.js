@@ -96,6 +96,12 @@ test('resource and operation values are unique', () => {
 	}
 });
 
+test('repository screenshots are kept out of the published tarball', () => {
+	// n8n-node build copies **/*.{png,svg} into dist, so docs/images lands in
+	// dist/docs/images and would add ~500kB to every install.
+	assert.ok(pkg.files.includes('!dist/docs/**'), 'files must exclude dist/docs/**');
+});
+
 test('credential targets an authenticated endpoint and asks for JSON', () => {
 	const cred = new LiteLlmApi();
 	assert.equal(cred.name, 'liteLlmApi');
