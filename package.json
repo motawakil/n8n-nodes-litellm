@@ -3,7 +3,7 @@
 	"version": "0.1.0",
 	"description": "n8n community node for the LiteLLM proxy management API: virtual keys, teams, users, models and spend",
 	"license": "MIT",
-	"homepage": "https://www.npmjs.com/package/@motaouakel/n8n-nodes-litellm",
+	"homepage": "https://github.com/motawakil/n8n-nodes-litellm#readme",
 	"keywords": [
 		"n8n-community-node-package",
 		"n8n",
@@ -51,5 +51,12 @@
 	},
 	"publishConfig": {
 		"access": "public"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/motawakil/n8n-nodes-litellm.git"
+	},
+	"bugs": {
+		"url": "https://github.com/motawakil/n8n-nodes-litellm/issues"
 	}
 }

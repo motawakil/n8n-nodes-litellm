@@ -9,12 +9,12 @@
 	"resources": {
 		"credentialDocumentation": [
 			{
-				"url": "https://www.npmjs.com/package/@motaouakel/n8n-nodes-litellm#credentials"
+				"url": "https://github.com/motawakil/n8n-nodes-litellm#credentials"
 			}
 		],
 		"primaryDocumentation": [
 			{
-				"url": "https://www.npmjs.com/package/@motaouakel/n8n-nodes-litellm"
+				"url": "https://github.com/motawakil/n8n-nodes-litellm#readme"
 			}
 		]
 	}
