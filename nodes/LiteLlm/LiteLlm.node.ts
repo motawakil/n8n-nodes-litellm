@@ -30,6 +30,9 @@ export class LiteLlm implements INodeType {
 		],
 		requestDefaults: {
 			baseURL: '={{ $credentials.baseUrl.replace(/\\/+$/, "") }}',
+			// Failed responses are handled by raiseApiError in postReceive so that
+			// LiteLLM's own message survives instead of n8n's generic status wording.
+			ignoreHttpStatusErrors: true,
 			headers: {
 				Accept: 'application/json',
 				'Content-Type': 'application/json',

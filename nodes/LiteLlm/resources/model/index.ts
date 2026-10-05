@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { raiseApiError } from '../../shared/errors';
 import { splitList } from '../../shared/utils';
 
 const showOnlyForModels = {
@@ -20,7 +21,7 @@ export const modelDescription: INodeProperties[] = [
 				description: 'Get the merged limits and providers behind one model group',
 				routing: {
 					request: { method: 'GET', url: '/model_group/info' },
-					output: { postReceive: [splitList('data')] },
+					output: { postReceive: [raiseApiError, splitList('data')] },
 				},
 			},
 			{
@@ -28,7 +29,7 @@ export const modelDescription: INodeProperties[] = [
 				value: 'getHealth',
 				action: 'Get model health',
 				description: 'Run a health check against every configured model. Can be slow.',
-				routing: { request: { method: 'GET', url: '/health' } },
+				routing: { request: { method: 'GET', url: '/health' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Get Many',
@@ -37,7 +38,7 @@ export const modelDescription: INodeProperties[] = [
 				description: 'List the models configured on the proxy, with their LiteLLM parameters',
 				routing: {
 					request: { method: 'GET', url: '/model/info' },
-					output: { postReceive: [splitList('data')] },
+					output: { postReceive: [raiseApiError, splitList('data')] },
 				},
 			},
 		],

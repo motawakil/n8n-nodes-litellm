@@ -62,6 +62,26 @@ which rebuilds and reloads for you.
 For a Docker-based instance, mount a host directory at `/home/node/.n8n/custom` and put the built
 package there, then restart the container.
 
+## Tests
+
+```bash
+npm test
+```
+
+Builds, then runs Node's built-in test runner against `dist/` — no test framework and no
+extra dependencies. The suite covers the publishing contract (package naming, the `n8n`
+block, zero runtime dependencies, every operation having a request, an action and error
+handling, no `$pageCount` in routing expressions) and the error-message extraction.
+
+Integration tests that exercise the `loadOptions` dropdowns against a real proxy are
+opt-in, and skip silently without these variables:
+
+```bash
+LITELLM_BASE_URL=http://127.0.0.1:4000 LITELLM_API_KEY=sk-... npm test
+```
+
+Use `127.0.0.1` rather than `localhost` — see below.
+
 ## Design constraints
 
 The package has **no runtime dependencies**, which is what n8n requires for verified status and for
@@ -99,6 +119,19 @@ codex also declares `subcategories.AI` containing `Root Nodes`. A node with the 
 AI subcategory is therefore invisible in both the regular panel and the AI panel — it loads fine
 server-side and simply never appears. The `usableAsTool` flag already gives us a generated
 `liteLlmTool` variant that n8n tags `AI` / `Tools` itself, which is the correct home for it.
+
+## Error messages
+
+n8n maps HTTP status codes to fixed strings, so a duplicate key alias, a malformed budget
+and a bad date would all surface as "Bad request - please check your parameters". The node
+sets `ignoreHttpStatusErrors` and runs `raiseApiError` as the first `postReceive` action on
+every operation, which reads LiteLLM's own message and raises that instead:
+
+| LiteLLM response | What you see |
+| --- | --- |
+| `{"detail":{"error":"Key alias already exists"}}` | Key alias already exists |
+| `{"detail":[{"loc":["query","page"],"msg":"Input should be a valid integer","input":"NaN"}]}` | page: Input should be a valid integer (received "NaN") |
+| `{"error":{"message":"Invalid proxy admin key"}}` | Invalid proxy admin key |
 
 ## Response shapes
 

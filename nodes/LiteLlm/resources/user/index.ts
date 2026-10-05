@@ -1,4 +1,5 @@
 import type { IDataObject, INodeProperties } from 'n8n-workflow';
+import { raiseApiError } from '../../shared/errors';
 import { splitCommaSeparated, splitList } from '../../shared/utils';
 import { userSettingFields } from './fields';
 
@@ -19,21 +20,21 @@ export const userDescription: INodeProperties[] = [
 				value: 'create',
 				action: 'Create a user',
 				description: 'Create a new internal user',
-				routing: { request: { method: 'POST', url: '/user/new' } },
+				routing: { request: { method: 'POST', url: '/user/new' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Delete',
 				value: 'delete',
 				action: 'Delete a user',
 				description: 'Permanently delete one or more internal users',
-				routing: { request: { method: 'POST', url: '/user/delete' } },
+				routing: { request: { method: 'POST', url: '/user/delete' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Get',
 				value: 'get',
 				action: 'Get a user',
 				description: 'Get the settings, keys and spend of an internal user',
-				routing: { request: { method: 'GET', url: '/user/info' } },
+				routing: { request: { method: 'GET', url: '/user/info' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Get Many',
@@ -42,7 +43,7 @@ export const userDescription: INodeProperties[] = [
 				description: 'List the internal users on the proxy',
 				routing: {
 					request: { method: 'GET', url: '/user/list' },
-					output: { postReceive: [splitList('users')] },
+					output: { postReceive: [raiseApiError, splitList('users')] },
 				},
 			},
 			{
@@ -50,7 +51,7 @@ export const userDescription: INodeProperties[] = [
 				value: 'update',
 				action: 'Update a user',
 				description: 'Change the settings of an existing internal user',
-				routing: { request: { method: 'POST', url: '/user/update' } },
+				routing: { request: { method: 'POST', url: '/user/update' }, output: { postReceive: [raiseApiError] } },
 			},
 		],
 		default: 'create',

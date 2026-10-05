@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { raiseApiError } from '../../shared/errors';
 
 const showOnlyForSpend = {
 	resource: ['spend'],
@@ -19,7 +20,7 @@ export const spendDescription: INodeProperties[] = [
 				value: 'getLogs',
 				action: 'Get spend logs',
 				description: 'Get the individual request logs with their cost',
-				routing: { request: { method: 'GET', url: '/spend/logs' } },
+				routing: { request: { method: 'GET', url: '/spend/logs' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Get Report',
@@ -27,14 +28,14 @@ export const spendDescription: INodeProperties[] = [
 				action: 'Get a spend report',
 				description:
 					'Get spend grouped by team, customer or key over a date range. Requires a LiteLLM Enterprise license.',
-				routing: { request: { method: 'GET', url: '/global/spend/report' } },
+				routing: { request: { method: 'GET', url: '/global/spend/report' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Get Tags',
 				value: 'getTags',
 				action: 'Get spend by tag',
 				description: 'Get spend grouped by the tags attached to requests',
-				routing: { request: { method: 'GET', url: '/spend/tags' } },
+				routing: { request: { method: 'GET', url: '/spend/tags' }, output: { postReceive: [raiseApiError] } },
 			},
 		],
 		default: 'getLogs',

@@ -1,4 +1,5 @@
 import type { INodeProperties } from 'n8n-workflow';
+import { raiseApiError } from '../../shared/errors';
 import { splitCommaSeparated, splitList } from '../../shared/utils';
 import { teamMemberFields, teamSettingFields } from './fields';
 
@@ -30,28 +31,28 @@ export const teamDescription: INodeProperties[] = [
 				value: 'addMember',
 				action: 'Add a member to a team',
 				description: 'Add a user to a team',
-				routing: { request: { method: 'POST', url: '/team/member_add' } },
+				routing: { request: { method: 'POST', url: '/team/member_add' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Create',
 				value: 'create',
 				action: 'Create a team',
 				description: 'Create a new team with its own budget and model access',
-				routing: { request: { method: 'POST', url: '/team/new' } },
+				routing: { request: { method: 'POST', url: '/team/new' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Delete',
 				value: 'delete',
 				action: 'Delete a team',
 				description: 'Permanently delete a team and its keys',
-				routing: { request: { method: 'POST', url: '/team/delete' } },
+				routing: { request: { method: 'POST', url: '/team/delete' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Get',
 				value: 'get',
 				action: 'Get a team',
 				description: 'Get the settings, members and spend of a team',
-				routing: { request: { method: 'GET', url: '/team/info' } },
+				routing: { request: { method: 'GET', url: '/team/info' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Get Many',
@@ -60,7 +61,7 @@ export const teamDescription: INodeProperties[] = [
 				description: 'List the teams on the proxy',
 				routing: {
 					request: { method: 'GET', url: '/team/list' },
-					output: { postReceive: [splitList('teams')] },
+					output: { postReceive: [raiseApiError, splitList('teams')] },
 				},
 			},
 			{
@@ -68,14 +69,14 @@ export const teamDescription: INodeProperties[] = [
 				value: 'removeMember',
 				action: 'Remove a member from a team',
 				description: 'Remove a user from a team',
-				routing: { request: { method: 'POST', url: '/team/member_delete' } },
+				routing: { request: { method: 'POST', url: '/team/member_delete' }, output: { postReceive: [raiseApiError] } },
 			},
 			{
 				name: 'Update',
 				value: 'update',
 				action: 'Update a team',
 				description: 'Change the settings of an existing team',
-				routing: { request: { method: 'POST', url: '/team/update' } },
+				routing: { request: { method: 'POST', url: '/team/update' }, output: { postReceive: [raiseApiError] } },
 			},
 		],
 		default: 'create',

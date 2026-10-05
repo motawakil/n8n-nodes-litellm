@@ -32,3 +32,8 @@ jobs:
 
       - name: Run build
         run: npm run build
+
+      - name: Run tests
+        # Live integration tests are skipped automatically without
+        # LITELLM_BASE_URL / LITELLM_API_KEY, so this stays hermetic.
+        run: node --test test/
